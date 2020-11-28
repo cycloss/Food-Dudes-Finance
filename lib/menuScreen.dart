@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:food_dudes_finance/ThirdScreen.dart';
+import 'package:food_dudes_finance/demoScreen.dart';
 import 'package:food_dudes_finance/tedScreen.dart';
 import 'package:food_dudes_finance/StonksScreen.dart';
 
@@ -12,7 +13,8 @@ class _MainMenuState extends State<MainMenu> {
   List<NameAndRoute> _nameAndRoutes = [
     NameAndRoute(name: 'Ted', screen: TedScreen()),
     NameAndRoute(name: 'Mass', screen: ThirdScreen()),
-    NameAndRoute(name: 'Alex', screen: StonksScreen())
+    NameAndRoute(name: 'Alex', screen: StonksScreen()),
+    NameAndRoute(name: 'Demo', screen: DemoClass('Food dudes app message'))
   ];
 
   @override

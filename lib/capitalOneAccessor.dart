@@ -4,19 +4,36 @@ import 'dart:async';
 
 const String apiUrl =
     "https://sandbox.capitalone.co.uk/developer-services-platform-pr/api/data/accounts";
-const Map<String, String> headers = {
-  'Authorization': 'Bearer ${keyFile.key}',
-  'version': '1.0'
-};
 
 main(List<String> args) async {
-  http.Response res = await fetchData();
+  http.Response res = await fetchAccounts();
   String bod = res.body;
   print(bod);
 }
 
-Future<http.Response> fetchData() {
-  return http.get(apiUrl, headers: headers);
+Future<http.Response> fetchAccounts() {
+  final Map<String, String> fetchHeaders = {
+    'Authorization': 'Bearer ${keyFile.key}',
+    'version': '1.0'
+  };
+  return http.get(apiUrl, headers: fetchHeaders);
+}
+
+Future<void> createAccount() {
+  final Map<String, String> createHeaders = {
+    'Content-Type': 'application/json',
+    'Authorization': 'Bearer ${keyFile.key}',
+    'version': '1.0',
+  };
+
+  Uri uri = Uri.tryParse("$apiUrl/create");
+
+  http.Request req = http.Request(
+    'POST',
+    uri,
+  );
+  req.headers.addAll(createHeaders);
+  req.send();
 }
 
 class Account {
