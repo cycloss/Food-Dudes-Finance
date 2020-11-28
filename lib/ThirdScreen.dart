@@ -36,11 +36,7 @@ class _ThirdScreenState extends State<ThirdScreen> {
       ),
       body: Container(
         decoration: BoxDecoration(
-          image: DecorationImage(
-            image: AssetImage('images/money.jpg'),
-            fit: BoxFit.cover,
-          )
-        ),
+         color: Colors.red,
         child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
