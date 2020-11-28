@@ -1,5 +1,7 @@
 import 'dart:math';
 
+import 'ThirdScreen.dart';
+
 import 'package:flutter/material.dart';
 import 'package:food_dudes_finance/ThirdScreen.dart';
 
