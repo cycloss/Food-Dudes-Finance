@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'secondScreen.dart';
+import 'package:food_dudes_finance/menuScreen.dart';
 
 void main() {
   runApp(MyApp());
@@ -68,8 +68,12 @@ class _MyHomePageState extends State<MyHomePage> {
               child: Text('Go to next screen'),
               onPressed: () {
                 print('hello world');
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => SecondScreen()));
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => MainMenu(),
+                  ),
+                );
               },
             )
           ],
