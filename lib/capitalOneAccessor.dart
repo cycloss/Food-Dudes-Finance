@@ -9,10 +9,10 @@ const String apiUrl =
 const int newAccountQuantity = 2;
 
 main(List<String> args) async {
-  http.StreamedResponse sres = await createAccounts();
-  String respStr = await sres.stream.bytesToString();
-  print(respStr);
-  sleep(Duration(seconds: 2));
+  // http.StreamedResponse sres = await createAccounts();
+  // String respStr = await sres.stream.bytesToString();
+  // print(respStr);
+  // sleep(Duration(seconds: 2));
   http.Response res = await fetchAccounts();
   String bod = res.body;
   print(bod);
