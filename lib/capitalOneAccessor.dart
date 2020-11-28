@@ -1,11 +1,18 @@
+import 'dart:io';
+
 import 'package:http/http.dart' as http;
 import 'apiKey.dart' as keyFile;
 import 'dart:async';
 
 const String apiUrl =
     "https://sandbox.capitalone.co.uk/developer-services-platform-pr/api/data/accounts";
+const int newAccountQuantity = 2;
 
 main(List<String> args) async {
+  http.StreamedResponse sres = await createAccounts();
+  String respStr = await sres.stream.bytesToString();
+  print(respStr);
+  sleep(Duration(seconds: 2));
   http.Response res = await fetchAccounts();
   String bod = res.body;
   print(bod);
@@ -19,7 +26,8 @@ Future<http.Response> fetchAccounts() {
   return http.get(apiUrl, headers: fetchHeaders);
 }
 
-Future<void> createAccount() {
+//do not call this function many times
+Future<http.StreamedResponse> createAccounts() {
   final Map<String, String> createHeaders = {
     'Content-Type': 'application/json',
     'Authorization': 'Bearer ${keyFile.key}',
@@ -33,7 +41,8 @@ Future<void> createAccount() {
     uri,
   );
   req.headers.addAll(createHeaders);
-  req.send();
+  req.body = "{\n    \"quantity\": $newAccountQuantity\n}";
+  return req.send();
 }
 
 class Account {
