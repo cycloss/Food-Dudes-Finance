@@ -1,3 +1,5 @@
+import 'dart:convert';
+import 'dart:ffi';
 import 'dart:io';
 
 import 'package:http/http.dart' as http;
@@ -15,7 +17,34 @@ main(List<String> args) async {
   // sleep(Duration(seconds: 2));
   http.Response res = await fetchAccounts();
   String bod = res.body;
-  print(bod);
+  List<Account> accounts = decodeJsonObj(bod);
+  for (Account acc in accounts) {
+    print(acc.firstname);
+  }
+}
+
+List<Account> decodeJsonObj(String bod) {
+  try {
+    Map<String, dynamic> obj = JsonDecoder().convert(bod);
+    if (obj != null) {
+      List<dynamic> accounts = obj['Accounts'];
+      List<Account> outAccounts = List();
+      for (Map<String, dynamic> accountData in accounts) {
+        if (accountData != null) {
+          Account acc = Account.fromJson(accountData);
+          outAccounts.add(acc);
+        } else {
+          print('Account was null');
+        }
+      }
+      return outAccounts;
+    } else {
+      print('Object was null');
+    }
+  } on FormatException catch (e) {
+    print(e.message);
+  }
+  return null;
 }
 
 Future<http.Response> fetchAccounts() {
@@ -61,6 +90,22 @@ class Account {
   String state;
   String creditLimit;
   String balance;
+
+  Account.fromJson(Map<String, dynamic> json)
+      : accountId = json['accountId'],
+        firstname = json['firstname'],
+        phoneNumber = json['phoneNumber'],
+        uci = json['uci'],
+        riskScore = json['riskScore'],
+        creditScore = json['creditScore'],
+        currencyCode = json['currencyCode'],
+        productType = json['productType'],
+        email = json['email'],
+        lastname = json['lastname'],
+        homeAddress = json['homeAddress'],
+        state = json['state'],
+        creditLimit = json['creditLimit'],
+        balance = json['balance'];
 
   Account(
       this.accountId,
