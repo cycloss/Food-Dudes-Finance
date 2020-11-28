@@ -1,6 +1,5 @@
 import 'dart:math';
 
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 import 'Transaction.dart';
@@ -39,24 +38,41 @@ class _ThirdScreenState extends State<ThirdScreen> {
   String savingsAdvice = "Ask for advice";
   String spending = "hi";
 
-  void getSpendingValue() {
-    setState(() {
-      spending = getSpendingEntertainment();
-    });
-  }
-
-  String getSpending(Transaction category) {
+  void getEntertainmentSpending() {
     double a = 0;
-    for (int i = 0; i < transactions.length; i++){
-      if (transactions[i].category == Category.Entertainment){
+    for (int i = 0; i < transactions.length; i++) {
+      if (transactions[i].category == Category.Entertainment) {
         a += transactions[i].amount;
       }
     }
-    return a.toString();
+    setState(() {
+      spending = "£" +a.toString();
+    });
   }
 
+  void getEducationSpending() {
+    double a = 0;
+    for (int i = 0; i < transactions.length; i++) {
+      if (transactions[i].category == Category.Education) {
+        a += transactions[i].amount;
+      }
+    }
+    setState(() {
+      spending = "£" +a.toString();
+    });
+  }
 
-
+  void getAutoTransportSpending() {
+    double a = 0;
+    for (int i = 0; i < transactions.length; i++) {
+      if (transactions[i].category == Category.AutoTransport) {
+        a += transactions[i].amount;
+      }
+    }
+    setState(() {
+      spending = "£" +a.toString();
+    });
+  }
 
 
   Widget build(BuildContext context) {
@@ -80,7 +96,13 @@ class _ThirdScreenState extends State<ThirdScreen> {
               ),
               RaisedButton(
                   child: Text('How much have I spent on Entertainment?'),
-                  onPressed: getSpendingValue),
+                  onPressed: getEntertainmentSpending),
+              RaisedButton(
+                  child: Text('How much have I spent on Education?'),
+                  onPressed: getEducationSpending),
+              RaisedButton(
+                  child: Text('How much have I spent on Auto & Transport?'),
+                  onPressed: getAutoTransportSpending),
               Container(
                 color: Colors.redAccent,
                 width: 250,
