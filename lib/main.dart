@@ -49,8 +49,13 @@ class _MyHomePageState extends State<MyHomePage> {
             Image(
               image: AssetImage('images/logo.png'),
             ),
-            Text('WE ARE FOOD DUDES'),
-            Text('ONE PUSH = ONE PRAYER'),
+            Text('WE ARE FOOD DUDES', style: TextStyle(fontSize: 20)),
+            RaisedButton(
+              child:
+                  Text('ONE PUSH = ONE PRAYER', style: TextStyle(fontSize: 20)),
+              onPressed: _incrementCounter,
+              color: Colors.blue,
+            ),
             Text(
               'You have pushed the button this many times:',
             ),
