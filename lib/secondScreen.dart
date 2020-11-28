@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:food_dudes_finance/ThirdScreen.dart';
 
 class SecondScreen extends StatefulWidget {
   @override
@@ -58,7 +59,14 @@ class _SecondScreenState extends State<SecondScreen> {
                   child: Text('Return to previous'),
                   onPressed: () {
                     Navigator.pop(context);
-                  })
+                  }),
+              RaisedButton(
+                child: Text('Go to next screen'),
+                onPressed: () {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => ThirdScreen()));
+                },
+              )
             ],
           ),
         ),
