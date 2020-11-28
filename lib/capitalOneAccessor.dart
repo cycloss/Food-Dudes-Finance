@@ -1,22 +1,48 @@
+import 'dart:io';
+
 import 'package:http/http.dart' as http;
 import 'apiKey.dart' as keyFile;
 import 'dart:async';
 
 const String apiUrl =
     "https://sandbox.capitalone.co.uk/developer-services-platform-pr/api/data/accounts";
-const Map<String, String> headers = {
-  'Authorization': 'Bearer ${keyFile.key}',
-  'version': '1.0'
-};
+const int newAccountQuantity = 2;
 
 main(List<String> args) async {
-  http.Response res = await fetchData();
+  // http.StreamedResponse sres = await createAccounts();
+  // String respStr = await sres.stream.bytesToString();
+  // print(respStr);
+  // sleep(Duration(seconds: 2));
+  http.Response res = await fetchAccounts();
   String bod = res.body;
   print(bod);
 }
 
-Future<http.Response> fetchData() {
-  return http.get(apiUrl, headers: headers);
+Future<http.Response> fetchAccounts() {
+  final Map<String, String> fetchHeaders = {
+    'Authorization': 'Bearer ${keyFile.key}',
+    'version': '1.0'
+  };
+  return http.get(apiUrl, headers: fetchHeaders);
+}
+
+//do not call this function many times
+Future<http.StreamedResponse> createAccounts() {
+  final Map<String, String> createHeaders = {
+    'Content-Type': 'application/json',
+    'Authorization': 'Bearer ${keyFile.key}',
+    'version': '1.0',
+  };
+
+  Uri uri = Uri.tryParse("$apiUrl/create");
+
+  http.Request req = http.Request(
+    'POST',
+    uri,
+  );
+  req.headers.addAll(createHeaders);
+  req.body = "{\n    \"quantity\": $newAccountQuantity\n}";
+  return req.send();
 }
 
 class Account {
