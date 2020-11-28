@@ -55,6 +55,14 @@ class _MyHomePageState extends State<MyHomePage> {
               '$_counter',
               style: Theme.of(context).textTheme.headline4,
             ),
+            RaisedButton(
+              child: Text('Go to next screen'),
+              onPressed: () {
+                print('hello world');
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => SecondScreen()));
+              },
+            )
           ],
         ),
       ),
@@ -62,6 +70,34 @@ class _MyHomePageState extends State<MyHomePage> {
         onPressed: _incrementCounter,
         tooltip: 'Increment',
         child: Icon(Icons.add),
+      ),
+    );
+  }
+}
+
+class SecondScreen extends StatefulWidget {
+  @override
+  _SecondScreenState createState() => _SecondScreenState();
+}
+
+class _SecondScreenState extends State<SecondScreen> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Center(
+        child: Container(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text('Hello from second screen'),
+              RaisedButton(
+                  child: Text('Return to previous'),
+                  onPressed: () {
+                    Navigator.pop(context);
+                  })
+            ],
+          ),
+        ),
       ),
     );
   }
