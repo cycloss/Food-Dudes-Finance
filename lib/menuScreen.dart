@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:food_dudes_finance/ThirdScreen.dart';
 import 'package:food_dudes_finance/tedScreen.dart';
+import 'package:food_dudes_finance/MartinScreen.dart';
 
 class MainMenu extends StatefulWidget {
   @override
@@ -10,7 +11,8 @@ class MainMenu extends StatefulWidget {
 class _MainMenuState extends State<MainMenu> {
   List<NameAndRoute> _nameAndRoutes = [
     NameAndRoute(name: 'Ted', screen: TedScreen()),
-    NameAndRoute(name: 'Mass', screen: ThirdScreen())
+    NameAndRoute(name: 'Mass', screen: ThirdScreen()),
+    NameAndRoute(name:'Martin', screen: MartinScreen())
   ];
 
   @override
