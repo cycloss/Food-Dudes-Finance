@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 
 class ThirdScreen extends StatefulWidget {
@@ -6,25 +8,58 @@ class ThirdScreen extends StatefulWidget {
 }
 
 class _ThirdScreenState extends State<ThirdScreen> {
+  int savings = 69;
   @override
+
+  List<String> advice = [
+    "Try harder",
+    "Stop buying food",
+    "You have too many mechanical keyboards",
+    "Just get a job",
+    "Pull up your bootstraps",
+    "Stop buying avocado toast"
+  ];
+
+  String savingsAdvice = "Ask for advice";
+
+  void getSavingsAdvice() {
+    setState(() {
+      savingsAdvice = advice[Random().nextInt(advice.length)];
+    });
+  }
+
+
   Widget build(BuildContext context) {
-    print("Hello World");
     return Scaffold(
       appBar: AppBar(
-        title: Text('Savings Data'),
+        title: const Text('Welcome to the save zone'),
       ),
-      body: Center(
-        child: Container(
-          child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceAround, children: [
-                //Image.asset(
-                  //'images/Stonks.jpg',
-                  //fit:
-                //)
-
-          ]),
+      body: Container(
+        decoration: BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage('images/money.jpg'),
+            fit: BoxFit.cover,
+          )
         ),
+        child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        children: [
+          Center(
+            child: Text('You have saved £' + savings.toString() + ' pounds!'),
+          ),
+          RaisedButton(
+              child: Text('Press this button for savings advice!'),
+              onPressed: getSavingsAdvice),
+          Container(
+            color: Colors.redAccent,
+            width: 250,
+            height: 250,
+            child: Text(savingsAdvice),
+            alignment: Alignment.center,
+          )
+        ],
       ),
+      )
     );
   }
 }
