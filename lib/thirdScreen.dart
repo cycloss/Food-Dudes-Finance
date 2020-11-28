@@ -1,11 +1,20 @@
 import 'dart:math';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+
+import 'Transaction.dart';
 
 class ThirdScreen extends StatefulWidget {
   @override
   _ThirdScreenState createState() => _ThirdScreenState();
 }
+
+Transaction transaction1 = Transaction(43.4, Category.Entertainment);
+Transaction transaction2 = Transaction(12.43, Category.Education);
+Transaction transaction3 = Transaction(33.4, Category.Entertainment);
+Transaction transaction4 = Transaction(23.54, Category.AutoTransport);
+Transaction transaction5 = Transaction(55.4, Category.GiftsDonations);
 
 class _ThirdScreenState extends State<ThirdScreen> {
   int savings = 69;
@@ -19,13 +28,36 @@ class _ThirdScreenState extends State<ThirdScreen> {
     "Stop buying avocado toast"
   ];
 
-  String savingsAdvice = "Ask for advice";
+  List<Transaction> transactions = [
+    transaction1,
+    transaction2,
+    transaction3,
+    transaction4,
+    transaction5
+  ];
 
-  void getSavingsAdvice() {
+  String savingsAdvice = "Ask for advice";
+  String spending = "hi";
+
+  void getSpendingValue() {
     setState(() {
-      savingsAdvice = advice[Random().nextInt(advice.length)];
+      spending = getSpendingEntertainment();
     });
   }
+
+  String getSpending(Transaction category) {
+    double a = 0;
+    for (int i = 0; i < transactions.length; i++){
+      if (transactions[i].category == Category.Entertainment){
+        a += transactions[i].amount;
+      }
+    }
+    return a.toString();
+  }
+
+
+
+
 
   Widget build(BuildContext context) {
     return Scaffold(
@@ -34,7 +66,10 @@ class _ThirdScreenState extends State<ThirdScreen> {
         ),
         body: Container(
           decoration: BoxDecoration(
-            color: Colors.red,
+            image: DecorationImage(
+              image: AssetImage('images/money.jpg'),
+              repeat: ImageRepeat.repeatY,
+            )
           ),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -44,13 +79,13 @@ class _ThirdScreenState extends State<ThirdScreen> {
                     Text('You have saved £' + savings.toString() + ' pounds!'),
               ),
               RaisedButton(
-                  child: Text('Press this button for savings advice!'),
-                  onPressed: getSavingsAdvice),
+                  child: Text('How much have I spent on Entertainment?'),
+                  onPressed: getSpendingValue),
               Container(
                 color: Colors.redAccent,
                 width: 250,
                 height: 250,
-                child: Text(savingsAdvice),
+                child: Text(spending),
                 alignment: Alignment.center,
               )
             ],
