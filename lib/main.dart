@@ -56,6 +56,7 @@ class _MyHomePageState extends State<MyHomePage> {
               onPressed: _incrementCounter,
               color: Colors.blue,
             ),
+            Text('Hello Alex'),
             Text(
               'You have pushed the button this many times:',
             ),
