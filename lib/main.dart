@@ -46,6 +46,9 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: <Widget>[
+            Image(
+              image: AssetImage('images/logo.png'),
+            ),
             Text('WE ARE FOOD DUDES'),
             Text('ONE PUSH = ONE PRAYER'),
             Text(
