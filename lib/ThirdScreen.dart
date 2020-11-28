@@ -34,7 +34,14 @@ class _ThirdScreenState extends State<ThirdScreen> {
       appBar: AppBar(
         title: const Text('Welcome to the save zone'),
       ),
-      body: Column(
+      body: Container(
+        decoration: BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage('images/money.jpg'),
+            fit: BoxFit.cover,
+          )
+        ),
+        child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
           Center(
@@ -52,6 +59,7 @@ class _ThirdScreenState extends State<ThirdScreen> {
           )
         ],
       ),
+      )
     );
   }
 }
