@@ -1,19 +1,24 @@
 import 'package:flutter/material.dart';
 
 class DemoClass extends StatelessWidget {
-  String message;
+  int accountId;
+  int phoneNumber;
+  int developerId;
+  int creditScore;
+  String firstName;
+  String currencyCode;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Demo screen'),
+        title: Text('Account info'),
       ),
-      body: Text(message),
+      body: Text(firstName),
     );
   }
 
-  DemoClass(String message) {
-    this.message = message;
+  DemoClass(String firstName) {
+    this.firstName = firstName;
   }
 }
