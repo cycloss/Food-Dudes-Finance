@@ -10,7 +10,6 @@ class ThirdScreen extends StatefulWidget {
 class _ThirdScreenState extends State<ThirdScreen> {
   int savings = 69;
   @override
-
   List<String> advice = [
     "Try harder",
     "Stop buying food",
@@ -28,38 +27,34 @@ class _ThirdScreenState extends State<ThirdScreen> {
     });
   }
 
-
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Welcome to the save zone'),
-      ),
-      body: Container(
-        decoration: BoxDecoration(
-          image: DecorationImage(
-            image: AssetImage('images/money.jpg'),
-            fit: BoxFit.cover,
-          )
+        appBar: AppBar(
+          title: const Text('Welcome to the save zone'),
         ),
-        child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
-        children: [
-          Center(
-            child: Text('You have saved £' + savings.toString() + ' pounds!'),
+        body: Container(
+          decoration: BoxDecoration(
+            color: Colors.red,
           ),
-          RaisedButton(
-              child: Text('Press this button for savings advice!'),
-              onPressed: getSavingsAdvice),
-          Container(
-            color: Colors.redAccent,
-            width: 250,
-            height: 250,
-            child: Text(savingsAdvice),
-            alignment: Alignment.center,
-          )
-        ],
-      ),
-      )
-    );
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              Center(
+                child:
+                    Text('You have saved £' + savings.toString() + ' pounds!'),
+              ),
+              RaisedButton(
+                  child: Text('Press this button for savings advice!'),
+                  onPressed: getSavingsAdvice),
+              Container(
+                color: Colors.redAccent,
+                width: 250,
+                height: 250,
+                child: Text(savingsAdvice),
+                alignment: Alignment.center,
+              )
+            ],
+          ),
+        ));
   }
 }
