@@ -1,8 +1,10 @@
 import 'dart:math';
 
+import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 
 import 'Transaction.dart';
+
 
 class ThirdScreen extends StatefulWidget {
   @override
@@ -74,7 +76,35 @@ class _ThirdScreenState extends State<ThirdScreen> {
     });
   }
 
+  double getEntertainmentSpendingValue() {
+    double a = 0;
+    for (int i = 0; i < transactions.length; i++) {
+      if (transactions[i].category == Category.Entertainment) {
+        a += transactions[i].amount;
+      }
+    }
+    return a;
+  }
 
+  double getEducationSpendingValue() {
+    double a = 0;
+    for (int i = 0; i < transactions.length; i++) {
+      if (transactions[i].category == Category.Education) {
+        a += transactions[i].amount;
+      }
+    }
+    return a;
+  }
+
+  double getAutoTransportSpendingValue() {
+    double a = 0;
+    for (int i = 0; i < transactions.length; i++) {
+      if (transactions[i].category == Category.AutoTransport) {
+        a += transactions[i].amount;
+      }
+    }
+    return a;
+  }
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
@@ -109,9 +139,53 @@ class _ThirdScreenState extends State<ThirdScreen> {
                 height: 250,
                 child: Text(spending),
                 alignment: Alignment.center,
-              )
+              ),
+              PieChart(
+                PieChartData(
+                  sectionsSpace: 0,
+                  centerSpaceRadius: 40,
+                  sections: showingSections()),
+                ),
             ],
           ),
         ));
+  }
+
+  List<PieChartSectionData> showingSections() {
+    return List.generate(3, (i) {
+      final double fontSize = 16;
+      final double radius = 50;
+      switch (i) {
+        case 0:
+          return PieChartSectionData(
+            color: const Color(0xff0293ee),
+            value: getEntertainmentSpendingValue(),
+            title: 'Entertainment',
+            radius: radius,
+            titleStyle: TextStyle(
+                fontSize: fontSize, fontWeight: FontWeight.bold, color: const Color(0xffffffff)),
+          );
+        case 1:
+          return PieChartSectionData(
+            color: const Color(0xfff8b250),
+            value: getEducationSpendingValue(),
+            title: 'Education',
+            radius: radius,
+            titleStyle: TextStyle(
+                fontSize: fontSize, fontWeight: FontWeight.bold, color: const Color(0xffffffff)),
+          );
+        case 2:
+          return PieChartSectionData(
+            color: const Color(0xff845bef),
+            value: getAutoTransportSpendingValue(),
+            title: 'Auto & Transport',
+            radius: radius,
+            titleStyle: TextStyle(
+                fontSize: fontSize, fontWeight: FontWeight.bold, color: const Color(0xffffffff)),
+          );
+        default:
+          return null;
+      }
+    });
   }
 }
